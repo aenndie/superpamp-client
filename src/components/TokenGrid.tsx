@@ -1,39 +1,27 @@
-import { useEffect, useState } from "react";
-import { Text } from "@chakra-ui/react";
-import apiClient from "../services/apiClient";
-
-interface Token {
-  id: number;
-  name: string;
-}
-
-/*interface TokensResponse {
-  count: number;
-  results: Token[];
-}
-  */
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import useTokens from "../hooks/useTokens";
+import TokenCard from "./TokenCard";
 
 const TokenGrid = () => {
-  const [tokens, setTokens] = useState<Token[]>([]);
-  const [error, setError] = useState("");
+  const { tokens, error } = useTokens();
 
-  useEffect(() => {
-    apiClient
-      .get<Token[]>("tokens")
-      .then((res) => setTokens(res.data))
-      .catch((err) => {
-        console.log("error:", err);
-        setError(err.response + "- " + err.response.data + "!");
-      });
-  });
   return (
     <>
       {error && <Text>{error}</Text>}
-      <ul>
+      <SimpleGrid
+        columns={{
+          sm: 1,
+          md: 2,
+          lg: 3,
+          xl: 5,
+        }}
+        spacing='10'
+        padding='10px'
+      >
         {tokens.map((token) => (
-          <li key={token.id}>{token.name}</li>
+          <TokenCard key={token.id} token={token} /> //
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
