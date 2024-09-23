@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.13.0",
     "@radixdlt/connect-button": "^1.0.4",
     "@radixdlt/radix-dapp-toolkit": "^2.0.1",
+    "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.5.6",
     "react": "^18.3.1",
