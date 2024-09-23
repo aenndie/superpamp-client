@@ -28,7 +28,9 @@ function Connect() {
     );
   }, []);
 
-  return <h1>Hello World</h1>;
+  const htmlContent: string = "<radix-connect-button>";
+
+  return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 }
 
 export default Connect;
