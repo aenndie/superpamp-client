@@ -13,13 +13,17 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@hookform/resolvers": "^3.9.0",
     "@radixdlt/connect-button": "^1.0.4",
     "@radixdlt/radix-dapp-toolkit": "^2.0.1",
+    "@radixdlt/radix-engine-toolkit": "^1.0.5",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.5.6",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.53.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

@@ -4,7 +4,12 @@ import apiClient from "../services/apiClient";
 export interface Token {
   id: number;
   name: string;
-  image: string;
+  symbol: string;
+  description: string;
+  filename: string;
+  net_sold: number;
+  resource_address: string;
+  component_address: string;
 }
 
 /*interface TokensResponse {
@@ -31,3 +36,20 @@ const useTokens = () => {
 };
 
 export default useTokens;
+
+export function uploadFile(id: number, selectedFile: File) {
+  const formData = new FormData();
+  formData.append("file", selectedFile);
+
+  console.log("sending file", selectedFile);
+  apiClient
+    .put("tokens/uploadimage/" + id, formData, {
+      headers: {
+        // 'Content-Type' is set automatically
+        // 'Authorization': 'Bearer your-token', // Add auth token if needed
+      },
+    })
+    .then(() => console.log("sending file success"))
+    .catch()
+    .finally();
+}
