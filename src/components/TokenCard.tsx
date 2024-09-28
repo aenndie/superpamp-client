@@ -1,6 +1,7 @@
 import { Card, CardBody, Heading, Image, Text, Button } from "@chakra-ui/react";
 import { Token } from "../hooks/useTokens";
 import { buy } from "../manifest/buy";
+import { sell } from "../manifest/sell";
 
 interface Props {
   token: Token;
@@ -16,9 +17,13 @@ const TokenCard = ({ token }: Props) => {
         <Heading fontSize='2xl'>
           {token.name + " (" + token.symbol + ")"}
         </Heading>
+        <Text>{token.id}</Text>
+        <Text>{token.componentAddress}</Text>
         <Text>{token.description}</Text>
-        <Text>{token.filename ? token.filename : "-"}</Text>
+        <Text>{token.imageUrl ?? "-"}</Text>
+        <Text>{token.iconUrl ?? "-"}</Text>
         <Button onClick={() => buy(token, 1000)}>Buy</Button>
+        <Button onClick={() => sell(token, 1000)}>Sell</Button>
       </CardBody>
     </Card>
   );

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/apiClient";
 
 export interface Token {
-  id: number;
+  id: string;
   name: string;
   symbol: string;
   description: string;
-  filename: string;
-  net_sold: number;
-  resource_address: string;
-  component_address: string;
+  componentAddress: string;
+  iconUrl: string;
+  imageUrl: string;
+  netSold: number;
 }
 
 /*interface TokensResponse {
@@ -17,6 +17,14 @@ export interface Token {
     results: Token[];
   }
     */
+export function get_price(
+  buy: boolean,
+  net_sold: number,
+  amount_token: number
+): number {
+  if (buy) return (amount_token + net_sold - net_sold) / 1000.0;
+  else return (amount_token + net_sold - net_sold) / 1000.0;
+}
 
 const useTokens = () => {
   const [tokens, setTokens] = useState<Token[]>([]);
@@ -25,12 +33,15 @@ const useTokens = () => {
   useEffect(() => {
     apiClient
       .get<Token[]>("tokens")
-      .then((res) => setTokens(res.data))
+      .then((res) => {
+        console.log("data....", res.data);
+        setTokens(res.data);
+      })
       .catch((err) => {
         console.log("error:", err);
         setError(err.response + "- " + err.response.data + "!");
       });
-  });
+  }, []);
 
   return { tokens, error };
 };

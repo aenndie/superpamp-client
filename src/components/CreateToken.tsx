@@ -22,6 +22,8 @@ import { uploadFile } from "../hooks/useTokens";
 import { ChangeEvent, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { Token } from "../hooks/useTokens";
+import { create } from "../manifest/create";
+import { CreateTokenType } from "../manifest/create";
 
 interface Props {
   isOpen: boolean;
@@ -43,7 +45,7 @@ const schema = z.object({
     .max(200, { message: "Description must not exceed 200 characters." }),
 });
 
-type FormData = z.infer<typeof schema>;
+export type FormData = z.infer<typeof schema>;
 
 /*interface FormData {
   name: string;
@@ -78,14 +80,23 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
 
     console.log("creating new token", data);
 
-    apiClient
+    const token: CreateTokenType = {
+      name: data.name,
+      symbol: data.symbol,
+      description: data.description,
+    };
+
+    create(token);
+
+    /*apiClient
       .post<Token>("tokens", data)
       .then((token) => {
         console.log("creation success - data = ", token.data.id);
         uploadFile(token.data.id, selectedFile);
+        create(token.data);
       })
       .catch()
-      .finally();
+      .finally();*/
   };
 
   return (

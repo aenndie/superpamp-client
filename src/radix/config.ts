@@ -22,3 +22,9 @@ if (IS_MAINNET) {
 }
 
 export { NETWORK_ID, DAPP_DEFINITION_ADDRESS, GATEWAY_API_URL };
+
+export const PACKAGE_ADDRESS =
+  "package_tdx_2_1p4d5g6v9e3432sfxf4n72cv4tk7mdykq4ydr7c9kylsz8a99nm6gwu";
+
+export const PLATFORM_COMPONENT_ADDRESS =
+  "component_tdx_2_1cz5ukxsrruutw60zadkt87h25xvhxmr90mf40xte440jpywlrjjuxh";
