@@ -3,6 +3,7 @@ import apiClient from "../services/apiClient";
 
 export interface Token {
   id: string;
+  createdDateTime: string;
   name: string;
   symbol: string;
   description: string;

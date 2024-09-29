@@ -24,7 +24,10 @@ if (IS_MAINNET) {
 export { NETWORK_ID, DAPP_DEFINITION_ADDRESS, GATEWAY_API_URL };
 
 export const PACKAGE_ADDRESS =
-  "package_tdx_2_1p4d5g6v9e3432sfxf4n72cv4tk7mdykq4ydr7c9kylsz8a99nm6gwu";
+  "package_tdx_2_1p4vvt8t3h6578y2xp348cp24dv8x6rfhecau0arrun3lrszct46xh3";
 
 export const PLATFORM_COMPONENT_ADDRESS =
-  "component_tdx_2_1cz5ukxsrruutw60zadkt87h25xvhxmr90mf40xte440jpywlrjjuxh";
+  "component_tdx_2_1crzaq69w5qkkkzclenurglrzqz4utmmcenamvumjxr0epzxl7y26n8";
+
+export const BOOST_TICKET_RESOURCE_ADDRESS =
+  "resource_tdx_2_1ntz944m3j32pn2ycd9c8dcs8wslac57dyw5l9wrtkrt0leeq550p4l";

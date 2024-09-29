@@ -1,6 +1,6 @@
 import { Token } from "../hooks/useTokens";
 import { sendTransactionManifest } from "../radix/manifestBuilder";
-import { account } from "../radix/dapp_toolkit";
+import { selectedAccount } from "../radix/dapp_toolkit";
 import { XRD } from "../radix/config";
 import { get_price } from "../hooks/useTokens";
 
@@ -41,7 +41,7 @@ export async function buy(token: Token, amount_token: number) {
   //let resource_address = token.resource_address();
 
   var manifest = buy_manifest_template
-    .replace(new RegExp("@@account@@", "g"), account)
+    .replace(new RegExp("@@account@@", "g"), selectedAccount)
     .replace(new RegExp("@@resource_address@@", "g"), XRD)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)
     .replace(new RegExp("@@buy_sell@@", "g"), "buy")

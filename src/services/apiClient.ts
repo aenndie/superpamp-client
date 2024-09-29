@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GATEWAY_API_URL } from "../radix/config";
 
 const apiClient = axios.create({
   //baseURL: "http://localhost:5195",
@@ -7,6 +8,10 @@ const apiClient = axios.create({
   /*params: {
     key: "",
   },*/
+});
+
+export const gatewayClient = axios.create({
+  baseURL: GATEWAY_API_URL,
 });
 
 export default apiClient;
