@@ -3,6 +3,8 @@ import { selectedAccount } from "../radix/dapp_toolkit";
 import { gatewayClient } from "../services/apiClient";
 import { NonFungibleIdsResponse } from "./NonFungibleDataTypes";
 
+export let boostCodes: string = "";
+
 function getNonFungibleCodes(
   resource: string,
   ids: string[]
@@ -91,6 +93,7 @@ export function getBoostTickets() {
       console.log("ids", ids);
       getNonFungibleCodes(resource, ids).then((codes) => {
         console.log("codes:", codes);
+        boostCodes = codes[0];
       });
     });
   });
