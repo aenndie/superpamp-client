@@ -1,7 +1,7 @@
 console.log(
   "dapp_toolkit.ts--------------------------------------------------------------"
 );
-import { getBoostTickets } from "../Gateway/boost-tickets";
+import { useContext } from "react";
 import { DAPP_DEFINITION_ADDRESS, NETWORK_ID } from "./config";
 
 import {
@@ -26,7 +26,9 @@ rdt.walletApi.setRequestData(
   DataRequestBuilder.accounts().exactly(1)
 );
 
+/*
 rdt.walletApi.walletData$.subscribe((walletData) => {
   console.log("rdt.walletApi.walletData$.subscribe((walletData) => {");
-  selectedAccount = walletData.accounts[0].address;
+  //selectedAccount = walletData.accounts[0].address;
 });
+*/

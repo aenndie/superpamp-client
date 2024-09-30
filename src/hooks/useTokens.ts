@@ -49,6 +49,26 @@ const useTokens = () => {
 
 export default useTokens;
 
+export const useToken = (id: string) => {
+  const [token, setToken] = useState<Token>();
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    apiClient
+      .get<Token>("tokens/" + id)
+      .then((res) => {
+        console.log("data....", res.data);
+        setToken(res.data);
+      })
+      .catch((err) => {
+        console.log("error:", err);
+        setError(err.response + "- " + err.response.data + "!");
+      });
+  }, []);
+
+  return { token, error };
+};
+
 export function uploadFile(id: number, selectedFile: File) {
   const formData = new FormData();
   formData.append("file", selectedFile);

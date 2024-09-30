@@ -1,11 +1,12 @@
-import { BOOST_TICKET_RESOURCE_ADDRESS } from "../radix/config";
+import { USER_BADGE_RESOURCE_ADDRESS } from "../radix/config";
 import { selectedAccount } from "../radix/dapp_toolkit";
 import { gatewayClient } from "../services/apiClient";
 import { NonFungibleIdsResponse } from "./NonFungibleDataTypes";
 
-export let boostCodes: string = "";
+//export let boostCodes: string = "";
+export let global_user_name = "";
 
-function getNonFungibleCodes(
+function getNonFungibleNames(
   resource: string,
   ids: string[]
 ): Promise<string[]> {
@@ -21,7 +22,7 @@ function getNonFungibleCodes(
     .then((response) => {
       for (const nf of response.data.non_fungible_ids) {
         for (const field of nf.data.programmatic_json.fields) {
-          if (field.field_name === "code") {
+          if (field.field_name === "name") {
             codes.push(field.value);
           }
         }
@@ -81,9 +82,10 @@ function getNonFungibleIDs(
     });
 }
 
-export function getBoostTickets() {
-  let account = selectedAccount;
-  let resource = BOOST_TICKET_RESOURCE_ADDRESS;
+/*export async function getUserName(account: string) {
+  let resource = USER_BADGE_RESOURCE_ADDRESS;
+
+  let username = "";
 
   console.log("getNonFungibleVault: ", account, ", ", resource);
 
@@ -91,10 +93,36 @@ export function getBoostTickets() {
     console.log("vault_address", vault_address);
     getNonFungibleIDs(account, resource, vault_address).then((ids) => {
       console.log("ids", ids);
-      getNonFungibleCodes(resource, ids).then((codes) => {
-        console.log("codes:", codes);
-        boostCodes = codes[0];
+      getNonFungibleNames(resource, ids).then((usernames) => {
+        console.log("usernames:", usernames);
+        let username = usernames[0];
+        global_user_name = username;
       });
     });
   });
+
+  return username;
+}
+*/
+
+export async function getUserName(account: string): Promise<string> {
+  let resource = USER_BADGE_RESOURCE_ADDRESS;
+
+  try {
+    console.log("getNonFungibleVault: ", account, ", ", resource);
+
+    const vault_address = await getNonFungibleVault(account, resource);
+    console.log("vault_address", vault_address);
+
+    const ids = await getNonFungibleIDs(account, resource, vault_address);
+    console.log("ids", ids);
+
+    const usernames = await getNonFungibleNames(resource, ids);
+    console.log("usernames:", usernames);
+
+    return usernames[0]; // Return the first username
+  } catch (error) {
+    console.error("Error fetching username:", error);
+    return ""; // Return an empty string or handle error appropriately
+  }
 }

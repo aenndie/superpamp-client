@@ -5,8 +5,8 @@ import { PLATFORM_COMPONENT_ADDRESS } from "../radix/config";
 const boost_manifest_template = `
 CALL_METHOD
     Address("@@component_address@@")
-    "boost"    
-    "@@code@@"
+    "create_user"    
+    "@@user_name@@"
 ;
 CALL_METHOD
 	Address("@@account_address@@")
@@ -15,10 +15,10 @@ CALL_METHOD
 ;
 `;
 
-export async function boost(code: string) {
+export async function create_user(user_name: string) {
   var manifest = boost_manifest_template
     .replace(new RegExp("@@account_address@@", "g"), selectedAccount)
-    .replace(new RegExp("@@code@@", "g"), code)
+    .replace(new RegExp("@@user_name@@", "g"), user_name)
     .replace(
       new RegExp("@@component_address@@", "g"),
       PLATFORM_COMPONENT_ADDRESS

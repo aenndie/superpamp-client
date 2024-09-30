@@ -1,25 +1,28 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import TokenGrid from "./components/TokenGrid";
+import { Outlet } from "react-router-dom";
+import { WalletProvider } from "./state_management/contexts/walletContext";
 
 function App() {
   return (
-    <Grid
-      templateAreas={{
-        base: ` "nav" "main"`,
-        lg: ` "nav nav" "aside main"`,
-      }}
-    >
-      <GridItem area='nav'>
-        <NavBar></NavBar>
-      </GridItem>
-      <Show above='lg'>
-        <GridItem area='aside'>Aside</GridItem>
-      </Show>
-      <GridItem area='main'>
-        <TokenGrid></TokenGrid>
-      </GridItem>
-    </Grid>
+    <WalletProvider>
+      <Grid
+        templateAreas={{
+          base: ` "nav" "main"`,
+          lg: ` "nav nav" "aside main"`,
+        }}
+      >
+        <GridItem area='nav'>
+          <NavBar></NavBar>
+        </GridItem>
+        <Show above='lg'>
+          <GridItem area='aside'>Aside</GridItem>
+        </Show>
+        <GridItem area='main'>
+          <Outlet></Outlet>
+        </GridItem>
+      </Grid>
+    </WalletProvider>
   );
 }
 

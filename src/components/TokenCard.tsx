@@ -1,7 +1,16 @@
-import { Card, CardBody, Heading, Image, Text, Button } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Heading,
+  Image,
+  Text,
+  Button,
+  Spacer,
+} from "@chakra-ui/react";
 import { Token } from "../hooks/useTokens";
 import { buy } from "../manifest/buy";
 import { sell } from "../manifest/sell";
+import { Link } from "react-router-dom";
 
 interface Props {
   token: Token;
@@ -18,12 +27,10 @@ const TokenCard = ({ token }: Props) => {
           {token.name + " (" + token.symbol + ")"}
         </Heading>
         <Text>{token.id}</Text>
-        <Text>{token.componentAddress}</Text>
-        <Text>{token.description}</Text>
-        <Text>{token.imageUrl ?? "-"}</Text>
-        <Text>{token.iconUrl ?? "-"}</Text>
         <Button onClick={() => buy(token, 1000)}>Buy</Button>
         <Button onClick={() => sell(token, 1000)}>Sell</Button>
+        <Spacer></Spacer>
+        <Link to={`/token/${token.id}`}>Details</Link>
       </CardBody>
     </Card>
   );
