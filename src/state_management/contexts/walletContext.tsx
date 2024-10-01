@@ -8,6 +8,8 @@ import {
 import { rdt } from "../../radix/dapp_toolkit";
 import { getUserName } from "../../Gateway/findUserBadges";
 
+export let selectedAccount: string;
+
 interface WalletContextType {
   address: string;
   username: string;
@@ -40,9 +42,10 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     // Subscribe to the walletData$ observable
     const subscription = rdt.walletApi.walletData$.subscribe((walletData) => {
       if (walletData && walletData.accounts && walletData.accounts.length > 0) {
-        const selectedAccount = walletData.accounts[0].address;
-        console.log(".... selectedAccount", selectedAccount);
-        fetchWalletData(selectedAccount);
+        const account = walletData.accounts[0].address;
+        selectedAccount = account;
+        console.log(".... selectedAccount", account);
+        fetchWalletData(account);
       }
     });
 

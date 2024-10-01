@@ -11,6 +11,7 @@ import { Token } from "../hooks/useTokens";
 import { buy } from "../manifest/buy";
 import { sell } from "../manifest/sell";
 import { Link } from "react-router-dom";
+import { useWallet } from "../state_management/contexts/walletContext";
 
 interface Props {
   token: Token;
@@ -19,6 +20,7 @@ interface Props {
 const DEFAULT_IMAGE = "http://localhost:5173/src/assets/meme.webp"; // Replace with your default image URL
 
 const TokenCard = ({ token }: Props) => {
+  const { username } = useWallet();
   return (
     <Card borderRadius={5} overflow='hidden'>
       <Image src={DEFAULT_IMAGE}></Image>
@@ -27,8 +29,8 @@ const TokenCard = ({ token }: Props) => {
           {token.name + " (" + token.symbol + ")"}
         </Heading>
         <Text>{token.id}</Text>
-        <Button onClick={() => buy(token, 1000)}>Buy</Button>
-        <Button onClick={() => sell(token, 1000)}>Sell</Button>
+        <Button onClick={() => buy(username, token, 1000)}>Buy</Button>
+        <Button onClick={() => sell(username, token, 1000)}>Sell</Button>
         <Spacer></Spacer>
         <Link to={`/token/${token.id}`}>Details</Link>
       </CardBody>

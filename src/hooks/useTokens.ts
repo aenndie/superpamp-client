@@ -13,11 +13,6 @@ export interface Token {
   netSold: number;
 }
 
-/*interface TokensResponse {
-    count: number;
-    results: Token[];
-  }
-    */
 export function get_price(
   buy: boolean,
   net_sold: number,
@@ -76,10 +71,7 @@ export function uploadFile(id: number, selectedFile: File) {
   console.log("sending file", selectedFile);
   apiClient
     .put("tokens/uploadimage/" + id, formData, {
-      headers: {
-        // 'Content-Type' is set automatically
-        // 'Authorization': 'Bearer your-token', // Add auth token if needed
-      },
+      headers: {},
     })
     .then(() => console.log("sending file success"))
     .catch()

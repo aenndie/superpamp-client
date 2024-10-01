@@ -1,10 +1,6 @@
 import { USER_BADGE_RESOURCE_ADDRESS } from "../radix/config";
-import { selectedAccount } from "../radix/dapp_toolkit";
 import { gatewayClient } from "../services/apiClient";
 import { NonFungibleIdsResponse } from "./NonFungibleDataTypes";
-
-//export let boostCodes: string = "";
-export let global_user_name = "";
 
 function getNonFungibleNames(
   resource: string,
@@ -81,29 +77,6 @@ function getNonFungibleIDs(
       return [];
     });
 }
-
-/*export async function getUserName(account: string) {
-  let resource = USER_BADGE_RESOURCE_ADDRESS;
-
-  let username = "";
-
-  console.log("getNonFungibleVault: ", account, ", ", resource);
-
-  getNonFungibleVault(account, resource).then((vault_address) => {
-    console.log("vault_address", vault_address);
-    getNonFungibleIDs(account, resource, vault_address).then((ids) => {
-      console.log("ids", ids);
-      getNonFungibleNames(resource, ids).then((usernames) => {
-        console.log("usernames:", usernames);
-        let username = usernames[0];
-        global_user_name = username;
-      });
-    });
-  });
-
-  return username;
-}
-*/
 
 export async function getUserName(account: string): Promise<string> {
   let resource = USER_BADGE_RESOURCE_ADDRESS;

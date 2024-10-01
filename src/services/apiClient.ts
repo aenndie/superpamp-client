@@ -1,10 +1,9 @@
 import axios from "axios";
-import { GATEWAY_API_URL } from "../radix/config";
+import { BACKEND_URL, GATEWAY_API_URL } from "../radix/config";
 
 const apiClient = axios.create({
   //baseURL: "http://localhost:5195",
-  baseURL: "https://localhost:7277/",
-  //baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: BACKEND_URL,
   /*params: {
     key: "",
   },*/

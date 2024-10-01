@@ -7,6 +7,8 @@ let DAPP_DEFINITION_ADDRESS: any;
 let GATEWAY_API_URL: any;
 export let XRD: string = "";
 
+export const BACKEND_URL = "https://localhost:7277/";
+
 if (IS_MAINNET) {
   NETWORK_ID = RadixNetwork.Mainnet;
   DAPP_DEFINITION_ADDRESS =
@@ -24,10 +26,10 @@ if (IS_MAINNET) {
 export { NETWORK_ID, DAPP_DEFINITION_ADDRESS, GATEWAY_API_URL };
 
 export const PACKAGE_ADDRESS =
-  "package_tdx_2_1p5942m9p99gfgv5dd0ga639dv9mqsf57u9r7vyy9q59mjtfezcjmx5";
+  "package_tdx_2_1phx3qaytumqh2k5dlchs2ug0qvy8mya5cuunqvsetdj7lzlkntgzqh";
 
 export const PLATFORM_COMPONENT_ADDRESS =
-  "component_tdx_2_1czjv779qgdfrnkamepkvsy7zs3ek9qkxpt8l6hmjmkw2sjqus7tv7u";
+  "component_tdx_2_1czx4a39y3409thedjavakuar8q9pp8uca3zyfzxjc85yqsfechmu3a";
 
 export const USER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1nfknca0wzhs04lvyshxadfy9rr6jhjua4hgzmc8qmnvaz3y4fg54st";
+  "resource_tdx_2_1n2savprqn9fvndpz40hgwqnq8una4t8zr5x5zzx54xdrj7zacpww5z";

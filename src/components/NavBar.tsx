@@ -3,23 +3,35 @@ import logo from "../assets/pumpix.webp";
 import Connect from "./Connect";
 import ColorModeSwitch from "./ColorModeSwitch";
 import CreateToken from "./CreateToken";
-import { create_user } from "../manifest/boost";
-// import { getUserName } from "../Gateway/boost-tickets";
-
+import CreateUser from "./CreateUser";
+import { useWallet } from "../state_management/contexts/walletContext";
 const NavBar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { username } = useWallet();
+  const tokenDialog = useDisclosure();
+  const userDialog = useDisclosure();
+  const hasUser = username != null;
   return (
     <HStack justifyContent='space-between' padding='10px'>
       <Image src={logo} boxSize='60px'></Image>
       <ColorModeSwitch />
-      <Button onClick={onOpen}>Create new token</Button>
-      <Button onClick={() => create_user("CODE")}>Create User</Button>
+      <Button isDisabled={!hasUser} onClick={tokenDialog.onOpen}>
+        Create new token
+      </Button>
+      <Button isDisabled={hasUser} onClick={userDialog.onOpen}>
+        Create User
+      </Button>
 
-      <CreateToken isOpen={isOpen} onClose={onClose}></CreateToken>
+      <CreateToken
+        isOpen={tokenDialog.isOpen}
+        onClose={tokenDialog.onClose}
+      ></CreateToken>
+      <CreateUser
+        isOpen={userDialog.isOpen}
+        onClose={userDialog.onClose}
+      ></CreateUser>
       <Connect></Connect>
     </HStack>
   );
 };
 
 export default NavBar;
-// <Button onClick={() => setUserName()}>Try Gateway</Button>

@@ -1,12 +1,18 @@
 import { Token } from "../hooks/useTokens";
 import { sendTransactionManifest } from "../radix/manifestBuilder";
-import { selectedAccount } from "../radix/dapp_toolkit";
-import { XRD } from "../radix/config";
+import { selectedAccount } from "../state_management/contexts/walletContext";
+import { USER_BADGE_RESOURCE_ADDRESS, XRD } from "../radix/config";
 import { get_price } from "../hooks/useTokens";
 
 const buy_manifest_template = `
 CALL_METHOD
-  Address("@@account@@")
+    Address("@@account_address@@")
+    "create_proof_of_non_fungibles"
+    Address("@@badge_address@@")
+    Array<NonFungibleLocalId>(NonFungibleLocalId("<@@user_name@@>"));
+POP_FROM_AUTH_ZONE Proof("proof");    
+CALL_METHOD
+  Address("@@account_address@@")
   "withdraw"
   Address("@@resource_address@@")
   Decimal("@@amount_xrd@@")
@@ -17,20 +23,24 @@ TAKE_ALL_FROM_WORKTOP
 ;
 CALL_METHOD
   Address("@@component_address@@")
-  "@@buy_sell@@"
+  "buy"
+  Proof("proof")
   Decimal("@@amount_token@@")
   Bucket("xrd_bucket")
   ""
 ;
 CALL_METHOD
-  Address("@@account@@")
+  Address("@@account_address@@")
   "deposit_batch"
   Expression("ENTIRE_WORKTOP")
 ;
 `;
 
-export async function buy(token: Token, amount_token: number) {
-  // TEMP: set values
+export async function buy(
+  username: string,
+  token: Token,
+  amount_token: number
+) {
   let amount_xrd = get_price(true, token.netSold, amount_token);
 
   console.log("amount_xrd = ", amount_xrd);
@@ -38,13 +48,12 @@ export async function buy(token: Token, amount_token: number) {
   console.log("netsold = ", token.netSold);
   console.log("componentaddress = ", token.componentAddress);
 
-  //let resource_address = token.resource_address();
-
   var manifest = buy_manifest_template
-    .replace(new RegExp("@@account@@", "g"), selectedAccount)
+    .replace(new RegExp("@@account_address@@", "g"), selectedAccount)
+    .replace(new RegExp("@@user_name@@", "g"), username)
+    .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@resource_address@@", "g"), XRD)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)
-    .replace(new RegExp("@@buy_sell@@", "g"), "buy")
     .replace(
       new RegExp("@@amount_xrd@@", "g"),
       Number.isInteger(amount_xrd)
@@ -63,6 +72,5 @@ export async function buy(token: Token, amount_token: number) {
   var succ = await sendTransactionManifest(manifest);
 
   if (succ) {
-    // TODO
   }
 }

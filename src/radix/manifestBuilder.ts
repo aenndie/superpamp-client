@@ -15,10 +15,9 @@ export async function sendTransactionManifest(manifest: string) {
   if (result.isErr()) {
     console.log("error while sending");
     throw result.error;
-
-    return false;
   } else {
     console.log("sent successfully");
-    return true;
   }
+
+  return !result.isErr();
 }

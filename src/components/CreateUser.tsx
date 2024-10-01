@@ -17,11 +17,9 @@ import {
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { create_token } from "../manifest/createToken";
-import { CreateTokenType } from "../manifest/createToken";
-import { useWallet } from "../state_management/contexts/walletContext";
+import { create_user, CreateUserType } from "../manifest/createUser";
 
 interface Props {
   isOpen: boolean;
@@ -29,33 +27,25 @@ interface Props {
 }
 
 const schema = z.object({
-  name: z
+  username: z
     .string()
-    .min(3, { message: "Name must be at least 3 characters." })
-    .max(50, { message: "Name must not exceed 50 characters." }),
-  symbol: z
-    .string()
-    .min(2, { message: "Symbol must be at least 2 characters." })
-    .max(5, { message: "Symbol must not exceed 5 characters." }),
-  description: z
-    .string()
-    .min(10, { message: "Description must be at least 10 characters." })
-    .max(200, { message: "Description must not exceed 200 characters." }),
+    .min(3, { message: "User name must be at least 3 characters." })
+    .max(50, { message: "User name must not exceed 50 characters." }),
+  bio: z.string().max(200, { message: "Bio must not exceed 200 characters." }),
 });
 
-export type FormData = z.infer<typeof schema>;
+type FormDataUser = z.infer<typeof schema>;
 
-const CreateToken = ({ isOpen, onClose }: Props) => {
-  const { username } = useWallet();
+const CreateUser = ({ isOpen, onClose }: Props) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showFileNotice, setShowFileNotice] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<FormDataUser>({ resolver: zodResolver(schema) });
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  /*const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       console.log("handleFileChange: ", event);
       setSelectedFile(event.target.files[0]);
@@ -64,23 +54,24 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
       setShowFileNotice(true);
     }
   };
+  */
 
   const onSubmit = async (data: FieldValues) => {
-    if (selectedFile == null) {
+    /*if (selectedFile == null) {
       setShowFileNotice(true);
       return;
-    }
+    }*/
 
-    console.log("creating new token", data);
+    console.log("creating new user", data);
 
-    const token: CreateTokenType = {
-      name: data.name,
-      symbol: data.symbol,
-      description: data.description,
+    const user: CreateUserType = {
+      username: data.username,
+      bio: data.bio2,
     };
 
-    let success = await create_token(token, username);
-    if (success) {
+    let succ = await create_user(user);
+
+    if (succ) {
       onClose();
     }
   };
@@ -93,45 +84,27 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
           <ModalCloseButton></ModalCloseButton>
         </ModalHeader>
         <ModalBody>
-          <form id='create-token-form' onSubmit={handleSubmit(onSubmit)}>
+          <form id='create-user-form' onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
-              <FormLabel>Create token</FormLabel>
-              <FormHelperText>Enter the name of your token.</FormHelperText>
+              <FormLabel>Create user</FormLabel>
+              <FormHelperText>Enter a user name.</FormHelperText>
               <Input
                 mt={2}
                 type='text'
-                placeholder='Name'
-                {...register("name")}
+                placeholder='User name'
+                {...register("username")}
               />
-              {errors.name && (
-                <Text color='red.500'>{errors.name.message}</Text>
+              {errors.username && (
+                <Text color='red.500'>{errors.username.message}</Text>
               )}
-              <FormHelperText>Enter the symbol of your token.</FormHelperText>
-              <Input
-                mt={2}
-                type='text'
-                placeholder='Symbol'
-                {...register("symbol")}
-              />
-              {errors.symbol && (
-                <Text color='red.500'>{errors.symbol.message}</Text>
-              )}
-              <FormHelperText>
-                Enter the description of your token.
-              </FormHelperText>
-              <Textarea
-                mt={2}
-                placeholder='Description'
-                {...register("description")}
-              />
-              {errors.description && (
-                <Text color='red.500'>{errors.description.message}</Text>
-              )}
+              <FormHelperText>Enter your bio.</FormHelperText>
+              <Textarea mt={2} placeholder='Bio' {...register("bio")} />
+              {errors.bio && <Text color='red.500'>{errors.bio.message}</Text>}
               <Box>
                 {/* Hidden file input */}
                 <Input
                   type='file'
-                  onChange={handleFileChange}
+                  // onChange={handleFileChange}
                   display='none'
                   id='file-upload'
                 />
@@ -162,7 +135,7 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
         <ModalFooter>
           <Button
             type='submit'
-            form='create-token-form'
+            form='create-user-form'
             isDisabled={!isValid && false}
           >
             Create
@@ -173,4 +146,4 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
   );
 };
 
-export default CreateToken;
+export default CreateUser;

@@ -1,7 +1,6 @@
 console.log(
   "dapp_toolkit.ts--------------------------------------------------------------"
 );
-import { useContext } from "react";
 import { DAPP_DEFINITION_ADDRESS, NETWORK_ID } from "./config";
 
 import {
@@ -9,8 +8,6 @@ import {
   Logger,
   DataRequestBuilder,
 } from "@radixdlt/radix-dapp-toolkit";
-
-export let selectedAccount: string;
 
 export const rdt = RadixDappToolkit({
   dAppDefinitionAddress: DAPP_DEFINITION_ADDRESS,
