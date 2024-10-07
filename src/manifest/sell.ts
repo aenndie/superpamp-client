@@ -24,7 +24,7 @@ CALL_METHOD
     "sell"    
     Proof("proof")
     Bucket("token_bucket")
-    ""
+    @@referrer@@
 ;
 CALL_METHOD
 	Address("@@account_address@@")
@@ -35,6 +35,7 @@ CALL_METHOD
 
 export async function sell(
   username: string,
+  _referrer: string,
   token: Token,
   amount_token: number
 ) {
@@ -44,6 +45,7 @@ export async function sell(
     .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@token_address@@", "g"), token.id)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)
+    .replace(new RegExp("@@referrer@@", "g"), "None" /*referrer*/)
     .replace(
       new RegExp("@@amount_token@@", "g"),
       Number.isInteger(amount_token)

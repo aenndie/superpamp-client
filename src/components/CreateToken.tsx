@@ -46,7 +46,7 @@ const schema = z.object({
 export type FormData = z.infer<typeof schema>;
 
 const CreateToken = ({ isOpen, onClose }: Props) => {
-  const { username } = useWallet();
+  const { userid } = useWallet();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showFileNotice, setShowFileNotice] = useState(false);
   const {
@@ -79,7 +79,7 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
       description: data.description,
     };
 
-    let success = await create_token(token, username);
+    let success = await create_token(token, userid, "");
     if (success) {
       onClose();
     }

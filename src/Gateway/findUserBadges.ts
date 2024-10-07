@@ -78,7 +78,10 @@ function getNonFungibleIDs(
     });
 }
 
-export async function getUserName(account: string): Promise<string> {
+export async function getUserNameAndIds(account: string): Promise<{
+  username: string;
+  userid: string;
+}> {
   let resource = USER_BADGE_RESOURCE_ADDRESS;
 
   try {
@@ -93,9 +96,15 @@ export async function getUserName(account: string): Promise<string> {
     const usernames = await getNonFungibleNames(resource, ids);
     console.log("usernames:", usernames);
 
-    return usernames[0]; // Return the first username
+    return {
+      username: usernames[0],
+      userid: ids[0],
+    }; // Return the first username
   } catch (error) {
     console.error("Error fetching username:", error);
-    return ""; // Return an empty string or handle error appropriately
+    return {
+      username: "",
+      userid: "",
+    }; // Return empty strings or handle error appropriately
   }
 }

@@ -27,7 +27,7 @@ CALL_METHOD
   Proof("proof")
   Decimal("@@amount_token@@")
   Bucket("xrd_bucket")
-  ""
+  @@referrer@@
 ;
 CALL_METHOD
   Address("@@account_address@@")
@@ -38,6 +38,7 @@ CALL_METHOD
 
 export async function buy(
   username: string,
+  _referrer: string,
   token: Token,
   amount_token: number
 ) {
@@ -51,6 +52,7 @@ export async function buy(
   var manifest = buy_manifest_template
     .replace(new RegExp("@@account_address@@", "g"), selectedAccount)
     .replace(new RegExp("@@user_name@@", "g"), username)
+    .replace(new RegExp("@@referrer@@", "g"), "None" /*referrer*/)
     .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@resource_address@@", "g"), XRD)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)

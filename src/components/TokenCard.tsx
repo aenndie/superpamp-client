@@ -29,8 +29,8 @@ const TokenCard = ({ token }: Props) => {
           {token.name + " (" + token.symbol + ")"}
         </Heading>
         <Text>{token.id}</Text>
-        <Button onClick={() => buy(username, token, 1000)}>Buy</Button>
-        <Button onClick={() => sell(username, token, 1000)}>Sell</Button>
+        <Button onClick={() => buy(username, "", token, 1000)}>Buy</Button>
+        <Button onClick={() => sell(username, "", token, 1000)}>Sell</Button>
         <Spacer></Spacer>
         <Link to={`/token/${token.id}`}>Details</Link>
       </CardBody>

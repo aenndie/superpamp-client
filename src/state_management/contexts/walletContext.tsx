@@ -6,13 +6,14 @@ import {
   useState,
 } from "react";
 import { rdt } from "../../radix/dapp_toolkit";
-import { getUserName } from "../../Gateway/findUserBadges";
+import { getUserNameAndIds } from "../../Gateway/findUserBadges";
 
 export let selectedAccount: string;
 
 interface WalletContextType {
   address: string;
   username: string;
+  userid: string;
 }
 
 const WalletContext = createContext<WalletContextType>({} as WalletContextType); // Correct type, default value
@@ -26,14 +27,19 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   const [wallet, setWalletAddress] = useState<WalletContextType>({
     address: "",
     username: "",
+    userid: "",
   });
 
   useEffect(() => {
     // Define an async function within useEffect to handle async logic
     const fetchWalletData = async (selectedAccount: string) => {
       try {
-        const userName = await getUserName(selectedAccount); // Await the async call
-        setWalletAddress({ address: selectedAccount, username: userName });
+        const { username, userid } = await getUserNameAndIds(selectedAccount); // Await the async call
+        setWalletAddress({
+          address: selectedAccount,
+          username: username,
+          userid: userid,
+        });
       } catch (error) {
         console.error("Error fetching username:", error);
       }
