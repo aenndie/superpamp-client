@@ -10,16 +10,15 @@ export interface Token {
   componentAddress: string;
   iconUrl: string;
   imageUrl: string;
-  netSold: number;
-}
-
-export function get_price(
-  buy: boolean,
-  net_sold: number,
-  amount_token: number
-): number {
-  if (buy) return (amount_token + net_sold - net_sold) / 1000.0;
-  else return (amount_token + net_sold - net_sold) / 1000.0;
+  tokenSold: string;
+  priceBondingStart: string;
+  mCapBondingStart: string;
+  tokenRemaining: string;
+  latestPriceBonding: string;
+  latestPricePool: string;
+  latestMcapBonding: string;
+  latestMcapPool: string;
+  bondingProgress: string;
 }
 
 const useTokens = () => {

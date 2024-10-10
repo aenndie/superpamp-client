@@ -2,14 +2,14 @@ import { Token } from "../hooks/useTokens";
 import { sendTransactionManifest } from "../radix/manifestBuilder";
 import { selectedAccount } from "../state_management/contexts/walletContext";
 import { USER_BADGE_RESOURCE_ADDRESS, XRD } from "../radix/config";
-import { get_price } from "../hooks/useTokens";
+import { get_price } from "../calculations";
 
 const buy_manifest_template = `
 CALL_METHOD
     Address("@@account_address@@")
     "create_proof_of_non_fungibles"
     Address("@@badge_address@@")
-    Array<NonFungibleLocalId>(NonFungibleLocalId("<@@user_name@@>"));
+    Array<NonFungibleLocalId>(NonFungibleLocalId("@@user_name@@"));
 POP_FROM_AUTH_ZONE Proof("proof");    
 CALL_METHOD
   Address("@@account_address@@")
@@ -42,11 +42,11 @@ export async function buy(
   token: Token,
   amount_token: number
 ) {
-  let amount_xrd = get_price(true, token.netSold, amount_token);
+  let amount_xrd = get_price(true, Number(token.tokenSold), amount_token);
 
   console.log("amount_xrd = ", amount_xrd);
   console.log("amount_token = ", amount_token);
-  console.log("netsold = ", token.netSold);
+  console.log("tokenSold = ", token.tokenSold);
   console.log("componentaddress = ", token.componentAddress);
 
   var manifest = buy_manifest_template
