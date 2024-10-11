@@ -2,12 +2,13 @@ import { Token } from "../hooks/useTokens";
 import { selectedAccount } from "../state_management/contexts/walletContext";
 import { sendTransactionManifest } from "../radix/manifestBuilder";
 import { USER_BADGE_RESOURCE_ADDRESS } from "../radix/config";
+import { get_ref_param } from "../cookies/refcookie";
 
 const sell_manifest_template = `CALL_METHOD
     Address("@@account_address@@")
     "create_proof_of_non_fungibles"
     Address("@@badge_address@@")
-    Array<NonFungibleLocalId>(NonFungibleLocalId("<@@user_name@@>"));
+    Array<NonFungibleLocalId>(NonFungibleLocalId("@@user_id@@"));
 POP_FROM_AUTH_ZONE Proof("proof");    
 CALL_METHOD
   Address("@@account_address@@")
@@ -34,18 +35,20 @@ CALL_METHOD
 `;
 
 export async function sell(
-  username: string,
+  userid: string,
   _referrer: string,
   token: Token,
   amount_token: number
 ) {
+  let referrer = get_ref_param();
+
   var manifest = sell_manifest_template
     .replace(new RegExp("@@account_address@@", "g"), selectedAccount)
-    .replace(new RegExp("@@user_name@@", "g"), username)
+    .replace(new RegExp("@@user_id@@", "g"), userid)
     .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@token_address@@", "g"), token.id)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)
-    .replace(new RegExp("@@referrer@@", "g"), "None" /*referrer*/)
+    .replace(new RegExp("@@referrer@@", "g"), "None") // referrer
     .replace(
       new RegExp("@@amount_token@@", "g"),
       Number.isInteger(amount_token)

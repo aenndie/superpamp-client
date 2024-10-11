@@ -14,7 +14,6 @@ interface WalletContextType {
   address: string;
   username: string;
   userid: string;
-  earnings_address: string;
 }
 
 const WalletContext = createContext<WalletContextType>({} as WalletContextType); // Correct type, default value
@@ -29,21 +28,17 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     address: "",
     username: "",
     userid: "",
-    earnings_address: "",
   });
 
   useEffect(() => {
     // Define an async function within useEffect to handle async logic
     const fetchWalletData = async (selectedAccount: string) => {
       try {
-        const { username, userid, earnings_address } = await getUserNameAndIds(
-          selectedAccount
-        ); // Await the async call
+        const { username, userid } = await getUserNameAndIds(selectedAccount); // Await the async call
         setWalletAddress({
           address: selectedAccount,
           username: username,
           userid: userid,
-          earnings_address: earnings_address,
         });
       } catch (error) {
         console.error("Error fetching username:", error);

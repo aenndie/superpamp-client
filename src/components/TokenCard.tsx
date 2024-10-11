@@ -15,7 +15,6 @@ import { sell } from "../manifest/sell";
 import { Link } from "react-router-dom";
 import { useWallet } from "../state_management/contexts/walletContext";
 import { useState } from "react";
-
 interface Props {
   token: Token;
 }

@@ -2,9 +2,10 @@ import { USER_BADGE_RESOURCE_ADDRESS } from "../radix/config";
 import { gatewayClient } from "../services/apiClient";
 import { NonFungibleIdsResponse } from "./NonFungibleDataTypes";
 
-function getNonFungibleNames(
+function getNonFungibleValues(
   resource: string,
-  ids: string[]
+  ids: string[],
+  field_name: string
 ): Promise<string[]> {
   const json = {
     resource_address: resource,
@@ -18,7 +19,7 @@ function getNonFungibleNames(
     .then((response) => {
       for (const nf of response.data.non_fungible_ids) {
         for (const field of nf.data.programmatic_json.fields) {
-          if (field.field_name === "name") {
+          if (field.field_name === field_name) {
             codes.push(field.value);
           }
         }
@@ -81,6 +82,7 @@ function getNonFungibleIDs(
 export async function getUserNameAndIds(account: string): Promise<{
   username: string;
   userid: string;
+  earnings_address: string;
 }> {
   let resource = USER_BADGE_RESOURCE_ADDRESS;
 
@@ -93,18 +95,27 @@ export async function getUserNameAndIds(account: string): Promise<{
     const ids = await getNonFungibleIDs(account, resource, vault_address);
     console.log("ids", ids);
 
-    const usernames = await getNonFungibleNames(resource, ids);
+    const usernames = await getNonFungibleValues(resource, ids, "name");
     console.log("usernames:", usernames);
+
+    const earning_addresses = await getNonFungibleValues(
+      resource,
+      ids,
+      "earnings"
+    );
+    console.log("earnings:", earning_addresses);
 
     return {
       username: usernames[0],
       userid: ids[0],
+      earnings_address: earning_addresses[0],
     }; // Return the first username
   } catch (error) {
     console.error("Error fetching username:", error);
     return {
       username: "",
       userid: "",
+      earnings_address: "",
     }; // Return empty strings or handle error appropriately
   }
 }
