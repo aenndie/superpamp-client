@@ -27,7 +27,13 @@ export interface Trade {
   bondingProgress: string;
 }
 
-const useTrades = (endpointName: string, qualifier: string) => {
+const useTrades = (
+  endpointName: string,
+  qualifier: string,
+  subscription: string,
+  listening: string,
+  unsubscription: string
+) => {
   const [trades, setTrades] = useState<Trade[]>([]);
   const [error, setError] = useState("");
   const [connection, setConnection] = useState<signalR.HubConnection | null>(
@@ -70,19 +76,23 @@ const useTrades = (endpointName: string, qualifier: string) => {
         .then(() => {
           console.log("SignalR Connected.");
           // Subscribe to the token-specific group
-          connection.invoke("SubscribeToToken", qualifier);
+          console.log("invoking...");
+          connection.invoke(subscription, qualifier);
+          console.log("after invoking.");
 
           // Listen for new trades related to this token
-          connection.on("ReceiveNewTrade", (newTrade: Trade) => {
+          console.log("listening....");
+          connection.on(listening, (newTrade: Trade) => {
             setTrades((prevTrades) => [newTrade, ...prevTrades]);
           });
+          console.log("after listening....");
         })
         .catch((err) => console.error("SignalR Connection Error:", err));
 
       // Unsubscribe when leaving the component
       return () => {
         connection
-          .invoke("UnsubscribeFromToken", qualifier)
+          .invoke(unsubscription, qualifier)
           .catch((err) => console.error(err));
       };
     }

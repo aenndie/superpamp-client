@@ -17,8 +17,11 @@ const TokenDetail = () => {
           <Text>{token.imageUrl ?? "-"}</Text>
           <Text>{token.iconUrl ?? "-"}</Text>
           <TradesList
-            key={token.id}
+            key={`trades-per-token${token.id}`}
             endpointName='trades'
+            subscription='SubscribeToTradeForToken'
+            listening='ReceiveNewTradeForToken'
+            unsubscription='UnsubscribeFromTradeForToken'
             qualifier={token.id}
           ></TradesList>
         </>

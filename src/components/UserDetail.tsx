@@ -18,11 +18,17 @@ const UserDetail = () => {
           <Text>{user.userName}</Text>
           <Text>{user.earningsComponentAddress}</Text>
           <Text>{user.currentBalance}</Text>
-          <EarningsList key={user.userId} userId={user.userId}></EarningsList>
+          <EarningsList
+            key={`earnings-${user.userId}`}
+            userId={user.userId}
+          ></EarningsList>
           <TradesList
-            key={user.userId}
+            key={`trades-per-user${user.userId}`}
             endpointName='tradesperuser'
-            qualifier={user.userId}
+            qualifier={user.userId.toString()}
+            subscription='SubscribeToTradeForUser'
+            listening='ReceiveNewTradeForUser'
+            unsubscription='UnsubscribeFromTradeForUser'
           ></TradesList>
         </>
       )}

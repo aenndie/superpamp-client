@@ -14,9 +14,24 @@ import useTrades from "../hooks/useTrades";
 interface Props {
   endpointName: string;
   qualifier: string;
+  subscription: string;
+  listening: string;
+  unsubscription: string;
 }
-const TradesList = ({ endpointName, qualifier }: Props) => {
-  const { trades, error } = useTrades(endpointName, qualifier); //token!.tokenAddress
+const TradesList = ({
+  endpointName,
+  qualifier,
+  subscription,
+  listening,
+  unsubscription,
+}: Props) => {
+  const { trades, error } = useTrades(
+    endpointName,
+    qualifier,
+    subscription,
+    listening,
+    unsubscription
+  );
 
   return (
     <div>
@@ -27,6 +42,7 @@ const TradesList = ({ endpointName, qualifier }: Props) => {
             <TableCaption>Trades for {qualifier}</TableCaption>
             <Thead>
               <Tr>
+                <Th>User</Th>
                 <Th>Action</Th>
                 <Th>DateTime</Th>
                 <Th isNumeric>Amount Token</Th>
@@ -36,6 +52,9 @@ const TradesList = ({ endpointName, qualifier }: Props) => {
             <Tbody>
               {trades.map((trade) => (
                 <Tr key={trade.tradeNr}>
+                  <Td>
+                    {trade.userName} ({trade.userId})
+                  </Td>
                   <Td>{trade.action}</Td>
                   <Td>{trade.dateTime}</Td>
                   <Td>{trade.amountToken}</Td>
