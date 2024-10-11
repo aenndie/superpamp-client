@@ -35,7 +35,7 @@ const TradesList = ({ endpointName, qualifier }: Props) => {
             </Thead>
             <Tbody>
               {trades.map((trade) => (
-                <Tr>
+                <Tr key={trade.tradeNr}>
                   <Td>{trade.action}</Td>
                   <Td>{trade.dateTime}</Td>
                   <Td>{trade.amountToken}</Td>
