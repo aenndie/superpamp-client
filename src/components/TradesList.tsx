@@ -11,6 +11,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import useTrades from "../hooks/useTrades";
+import formatDecimalString from "../misc/format";
 interface Props {
   endpointName: string;
   qualifier: string;
@@ -57,8 +58,8 @@ const TradesList = ({
                   </Td>
                   <Td>{trade.action}</Td>
                   <Td>{trade.dateTime}</Td>
-                  <Td>{trade.amountToken}</Td>
-                  <Td>{trade.amountXrd}</Td>
+                  <Td>{formatDecimalString(trade.amountToken)}</Td>
+                  <Td>{formatDecimalString(trade.amountXrd)}</Td>
                 </Tr>
               ))}
             </Tbody>

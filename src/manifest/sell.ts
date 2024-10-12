@@ -34,12 +34,7 @@ CALL_METHOD
 ;    
 `;
 
-export async function sell(
-  userid: string,
-  _referrer: string,
-  token: Token,
-  amount_token: number
-) {
+export async function sell(userid: string, token: Token, amount_token: number) {
   let referrer = get_ref_param();
 
   var manifest = sell_manifest_template
@@ -48,7 +43,7 @@ export async function sell(
     .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@token_address@@", "g"), token.id)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)
-    .replace(new RegExp("@@referrer@@", "g"), "None") // referrer
+    .replace(new RegExp("@@referrer@@", "g"), referrer)
     .replace(
       new RegExp("@@amount_token@@", "g"),
       Number.isInteger(amount_token)

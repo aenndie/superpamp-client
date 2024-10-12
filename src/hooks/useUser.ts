@@ -9,26 +9,6 @@ export interface User {
   currentBalance: string;
 }
 
-const useUsers = () => {
-  const [user, setTokens] = useState<User[]>([]);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    apiClient
-      .get<User[]>("users")
-      .then((res) => {
-        console.log("data....", res.data);
-        setTokens(res.data);
-      })
-      .catch((err) => {
-        console.log("error:", err);
-        setError(err.response + "- " + err.response.data + "!");
-      });
-  }, []);
-
-  return { user, error };
-};
-
 export const useUser = (userId: string) => {
   const [user, setToken] = useState<User>();
   const [error, setError] = useState("");
@@ -47,6 +27,26 @@ export const useUser = (userId: string) => {
   }, []);
 
   return { user, error };
+};
+
+export const useUsers = () => {
+  const [users, setToken] = useState<User[]>([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    apiClient
+      .get<User[]>("users")
+      .then((res) => {
+        console.log("data....", res.data);
+        setToken(res.data);
+      })
+      .catch((err) => {
+        console.log("error:", err);
+        setError(err.response + "- " + err.response.data + "!");
+      });
+  }, []);
+
+  return { users, error };
 };
 
 export default useUser;

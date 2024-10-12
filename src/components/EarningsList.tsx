@@ -11,6 +11,7 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import useEarnings from "../hooks/useEarnings";
+import formatDecimalString from "../misc/format";
 interface Props {
   userId: string;
 }
@@ -27,33 +28,39 @@ const EarningsList = ({ userId }: Props) => {
             <Thead>
               <Tr>
                 <Th>DateTim</Th>
+                <Th>Username</Th>
+                <Th>Provision Xrd</Th>
                 <Th>Action</Th>
                 <Th>Token Name</Th>
                 <Th>Token Symbol</Th>
                 <Th>Amount Token</Th>
                 <Th>Amount Xrd</Th>
-                <Th>Provision Xrd</Th>
               </Tr>
             </Thead>
             <Tbody>
               {earnings.map((earning) => (
                 <Tr>
                   <Td>{earning.createdDate}</Td>
+                  <Td>{earning.userName}</Td>
+                  <Td>{formatDecimalString(earning.provisionXrd)}</Td>
                   <Td>{earning.action}</Td>
                   <Td>{earning.tokenName}</Td>
                   <Td>{earning.tokenSymbol}</Td>
-                  <Td>{earning.amountToken}</Td>
-                  <Td>{earning.amountXrd}</Td>
-                  <Td>{earning.provisionXrd}</Td>
+                  <Td>{formatDecimalString(earning.amountToken)}</Td>
+                  <Td>{formatDecimalString(earning.amountXrd)}</Td>
                 </Tr>
               ))}
             </Tbody>
             <Tfoot>
               <Tr>
+                <Th>DateTim</Th>
+                <Th>Username</Th>
+                <Th>Provision Xrd</Th>
                 <Th>Action</Th>
-                <Th>DateTime</Th>
-                <Th isNumeric>Amount Token</Th>
-                <Th isNumeric>Amount XRD</Th>
+                <Th>Token Name</Th>
+                <Th>Token Symbol</Th>
+                <Th>Amount Token</Th>
+                <Th>Amount Xrd</Th>
               </Tr>
             </Tfoot>
           </Table>

@@ -29,11 +29,11 @@ const TokenCard = ({ token }: Props) => {
   };
 
   const handleBuy = () => {
-    buy(userid, "", token, amount);
+    buy(userid, token, amount);
   };
 
   const handleSell = () => {
-    sell(userid, "", token, amount);
+    sell(userid, token, amount);
   };
 
   return (

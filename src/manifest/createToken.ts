@@ -1,11 +1,11 @@
 import { sendTransactionManifest } from "../radix/manifestBuilder";
 import {
-  PACKAGE_ADDRESS,
   PLATFORM_COMPONENT_ADDRESS,
   USER_BADGE_RESOURCE_ADDRESS,
   XRD,
 } from "../radix/config";
 import { selectedAccount } from "../state_management/contexts/walletContext";
+import { get_ref_param } from "../cookies/refcookie";
 
 const create_manifest_template = `
 CALL_METHOD
@@ -49,19 +49,15 @@ export interface CreateTokenType {
   description: string;
 }
 
-export async function create_token(
-  token: CreateTokenType,
-  userid: string,
-  _referrer: string
-) {
-  // TEMP: set values
+export async function create_token(token: CreateTokenType, userid: string) {
+  let referrer = get_ref_param();
 
   var manifest = create_manifest_template
     .replace(new RegExp("@@account@@", "g"), selectedAccount)
     .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@user_name@@", "g"), userid)
-    .replace(new RegExp("@@package_address@@", "g"), PACKAGE_ADDRESS)
-    .replace(new RegExp("@@referrer@@", "g"), "None" /*referrer*/)
+    //.replace(new RegExp("@@package_address@@", "g"), PACKAGE_ADDRESS)
+    .replace(new RegExp("@@referrer@@", "g"), referrer)
     .replace(new RegExp("@@resource_xrd@@", "g"), XRD)
     .replace(
       new RegExp("@@component_address@@", "g"),

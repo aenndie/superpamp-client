@@ -36,12 +36,7 @@ CALL_METHOD
 ;
 `;
 
-export async function buy(
-  userid: string,
-  _referrer: string,
-  token: Token,
-  amount_xrd: number
-) {
+export async function buy(userid: string, token: Token, amount_xrd: number) {
   // let amount_xrd = get_price(true, Number(token.tokenSold), amount_token);
 
   let referrer = get_ref_param();
@@ -55,7 +50,7 @@ export async function buy(
   var manifest = buy_manifest_template
     .replace(new RegExp("@@account_address@@", "g"), selectedAccount)
     .replace(new RegExp("@@user_id@@", "g"), userid)
-    .replace(new RegExp("@@referrer@@", "g"), "None") // referrer
+    .replace(new RegExp("@@referrer@@", "g"), referrer)
     .replace(new RegExp("@@badge_address@@", "g"), USER_BADGE_RESOURCE_ADDRESS)
     .replace(new RegExp("@@resource_address@@", "g"), XRD)
     .replace(new RegExp("@@component_address@@", "g"), token.componentAddress)

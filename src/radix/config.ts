@@ -25,14 +25,14 @@ if (IS_MAINNET) {
 
 export { NETWORK_ID, DAPP_DEFINITION_ADDRESS, GATEWAY_API_URL };
 
-export const PACKAGE_ADDRESS =
-  "package_tdx_2_1pkn9k8l062ul6f7j0l600awpnfgxwrqtfn95fspkpx89wnu6xys8l3";
+//export const PACKAGE_ADDRESS =
+//" package_tdx_2_1p5y23xuhxprfl0fw2njxa7sg0m8aqzvcat6mlkc2mnmtlfnne6hl23";
 
 export const PLATFORM_COMPONENT_ADDRESS =
-  "component_tdx_2_1cqt3dgqal45d4mnnslxe9njtfyjjhp7ywkht4lksa5lcmmq30e925q";
+  "component_tdx_2_1cqulueycevn757vxk7tacdyt8ll0lgtjan85wh4gwnpzx00jed3eka";
 
 export const USER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1ng22zk0p0gyl7e4zu6tp7lr7wwdavm75jk4mtrg3qzw5j67a0r7ung";
+  "resource_tdx_2_1nt3xw2mk6jcyh255hcy3z4kx0l86wqntkpmhf76zn5j4tyr4d2ncw2";
 
 export const OWNER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1ngugx4fsvjcthpgkee6zxyasz4c627m6lurgqjuk66k79ppylzd6n0";
+  "resource_tdx_2_1ntymr2z642ge7ycjk40r89mn5pc8g5v8lymhznnrjptklm0z2pne05";

@@ -4,6 +4,7 @@ import TokenGrid from "../components/TokenGrid";
 import { Text } from "@chakra-ui/react";
 import TokenDetail from "../components/TokenDetail";
 import UserDetail from "../components/UserDetail";
+import UsersList from "../components/UsersList";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/token/:address",
         element: <TokenDetail></TokenDetail>,
+      },
+      {
+        path: "/user",
+        element: <UsersList></UsersList>,
       },
       {
         path: "/user/:userid",
