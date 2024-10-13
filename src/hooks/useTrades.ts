@@ -10,13 +10,16 @@ export interface Trade {
   dateTimeSeconds: string;
   dateTime: string;
   action: string;
+  tokenAddress: string;
+  tokenName: string;
+  tokenSymbol: string;
   amountToken: string;
   amountTokenDec: string;
   amountXrd: string;
   amountXrdDec: string;
   amountReferral: string;
   amountBoostedDec: string;
-  aeferrerId: string;
+  referrerId: string;
   referrerName: string;
   tokenSold: string;
   tokenRemaining: string;

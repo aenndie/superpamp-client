@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import formatDecimalString from "../misc/format";
 import { useUsers } from "../hooks/useUser";
+import { Link } from "react-router-dom";
 
 const UsersList = () => {
   const { users, error } = useUsers();
@@ -25,8 +26,7 @@ const UsersList = () => {
             <TableCaption>Users</TableCaption>
             <Thead>
               <Tr>
-                <Th>User Id</Th>
-                <Th>User Name</Th>
+                <Th>User </Th>
                 <Th>Earnings Component Address</Th>
                 <Th isNumeric>Current Balance</Th>
               </Tr>
@@ -34,8 +34,12 @@ const UsersList = () => {
             <Tbody>
               {users.map((user) => (
                 <Tr key={user.userId}>
-                  <Td>{user.userId}</Td>
-                  <Td>{user.userName}</Td>
+                  <Td>
+                    <Link to={`/user/${user.userId}`}>
+                      {user.userName} ({user.userId})
+                    </Link>
+                  </Td>
+                  <Td></Td>
                   <Td>{user.earningsComponentAddress}</Td>
                   <Td>{formatDecimalString(user.currentBalance)}</Td>
                 </Tr>
@@ -43,8 +47,7 @@ const UsersList = () => {
             </Tbody>
             <Tfoot>
               <Tr>
-                <Th>User Id</Th>
-                <Th>User Name</Th>
+                <Th>User</Th>
                 <Th>Earnings Component Address</Th>
                 <Th isNumeric>Current Balance</Th>
               </Tr>

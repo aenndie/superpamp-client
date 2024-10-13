@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import {
+  Box,
   Tab,
   TabList,
   TabPanel,
@@ -34,29 +35,35 @@ const UserDetail = () => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <EarningsList
-                  key={`earnings-${user.userId}`}
-                  userId={user.userId}
-                ></EarningsList>
+                <Box minWidth='1200px'>
+                  <EarningsList
+                    key={`earnings-${user.userId}`}
+                    userId={user.userId}
+                  ></EarningsList>
+                </Box>
               </TabPanel>
               <TabPanel>
-                <TradesList
-                  key={`trades-per-user${user.userId}`}
-                  endpointName='tradesperuser'
-                  qualifier={user.userId.toString()}
-                  subscription='SubscribeToTradeForUser'
-                  listening='ReceiveNewTradeForUser'
-                  unsubscription='UnsubscribeFromTradeForUser'
-                ></TradesList>
+                <Box minWidth='1200px'>
+                  <TradesList
+                    key={`trades-per-user${user.userId}`}
+                    endpointName='tradesperuser'
+                    qualifier={user.userId.toString()}
+                    subscription='SubscribeToTradeForUser'
+                    listening='ReceiveNewTradeForUser'
+                    unsubscription='UnsubscribeFromTradeForUser'
+                  ></TradesList>
+                </Box>
               </TabPanel>
               <TabPanel>
-                <TokenHolderList
-                  endpointName='holdersperuser'
-                  qualifier={user.userId}
-                  subscription=''
-                  listening=''
-                  unsubscription=''
-                ></TokenHolderList>
+                <Box minWidth='1200px'>
+                  <TokenHolderList
+                    endpointName='holdersperuser'
+                    qualifier={user.userId}
+                    subscription=''
+                    listening=''
+                    unsubscription=''
+                  ></TokenHolderList>
+                </Box>
               </TabPanel>
             </TabPanels>
           </Tabs>

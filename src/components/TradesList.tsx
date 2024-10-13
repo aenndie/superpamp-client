@@ -10,6 +10,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import useTrades from "../hooks/useTrades";
 import formatDecimalString from "../misc/format";
 interface Props {
@@ -44,8 +45,8 @@ const TradesList = ({
             <Thead>
               <Tr>
                 <Th>User</Th>
-                <Th>Action</Th>
                 <Th>DateTime</Th>
+                <Th>Action</Th>
                 <Th isNumeric>Amount Token</Th>
                 <Th isNumeric>Amount XRD</Th>
               </Tr>
@@ -54,10 +55,17 @@ const TradesList = ({
               {trades.map((trade) => (
                 <Tr key={trade.tradeNr}>
                   <Td>
-                    {trade.userName} ({trade.userId})
+                    <Link to={`/user/${trade.userId}`}>
+                      {trade.userName} ({trade.userId})
+                    </Link>
                   </Td>
-                  <Td>{trade.action}</Td>
                   <Td>{trade.dateTime}</Td>
+                  <Td>{trade.action}</Td>
+                  <Td>
+                    <Link to={`/token/${trade.tokenAddress}`}>
+                      {trade.tokenName} ({trade.tokenSymbol})
+                    </Link>
+                  </Td>
                   <Td>{formatDecimalString(trade.amountToken)}</Td>
                   <Td>{formatDecimalString(trade.amountXrd)}</Td>
                 </Tr>

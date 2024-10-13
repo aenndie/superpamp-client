@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useToken } from "../hooks/useTokens";
 import {
+  Box,
   Tab,
   TabList,
   TabPanel,
@@ -24,30 +25,34 @@ const TokenDetail = () => {
           <Text>{token.description}</Text>
           <Text>{token.imageUrl ?? "-"}</Text>
           <Text>{token.iconUrl ?? "-"}</Text>
-          <Tabs>
+          <Tabs align='start'>
             <TabList>
               <Tab>Trades</Tab>
               <Tab>Holder</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
-                <TradesList
-                  key={`trades-per-token${token.id}`}
-                  endpointName='trades'
-                  subscription='SubscribeToTradeForToken'
-                  listening='ReceiveNewTradeForToken'
-                  unsubscription='UnsubscribeFromTradeForToken'
-                  qualifier={token.id}
-                ></TradesList>
+                <Box minWidth='1200px'>
+                  <TradesList
+                    key={`trades-per-token${token.id}`}
+                    endpointName='trades'
+                    subscription='SubscribeToTradeForToken'
+                    listening='ReceiveNewTradeForToken'
+                    unsubscription='UnsubscribeFromTradeForToken'
+                    qualifier={token.id}
+                  ></TradesList>
+                </Box>
               </TabPanel>
               <TabPanel>
-                <TokenHolderList
-                  endpointName='holderspertoken'
-                  qualifier={token.id}
-                  subscription=''
-                  listening=''
-                  unsubscription=''
-                ></TokenHolderList>
+                <Box minWidth='1200px'>
+                  <TokenHolderList
+                    endpointName='holderspertoken'
+                    qualifier={token.id}
+                    subscription=''
+                    listening=''
+                    unsubscription=''
+                  ></TokenHolderList>
+                </Box>
               </TabPanel>
             </TabPanels>
           </Tabs>

@@ -8,6 +8,7 @@ import {
   Spacer,
   Input,
   FormControl,
+  Box,
 } from "@chakra-ui/react";
 import { Token } from "../hooks/useTokens";
 import { buy } from "../manifest/buy";
@@ -60,12 +61,16 @@ const TokenCard = ({ token }: Props) => {
           </Button>
         </FormControl>
         <Spacer></Spacer>
-        <Link to={`/token/${token.id}`}>Details</Link>
         <Text>Latest Mcap Pool: {token.latestMcapPool}</Text>
         <Text>Latest Mcap Bonding: {token.latestMcapBonding}</Text>
         <Text>Latest Price Bonding: {token.latestPriceBonding}</Text>
         <Text>Latest Price Pool: {token.latestPricePool}</Text>
         <Text>Bonding Progress: {token.bondingProgress}</Text>
+        <Box>
+          <Button>
+            <Link to={`/token/${token.id}`}>Details</Link>
+          </Button>
+        </Box>
       </CardBody>
     </Card>
   );

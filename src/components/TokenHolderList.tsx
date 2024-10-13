@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import useTokenHolders from "../hooks/useTokenHolder";
 import formatDecimalString from "../misc/format";
+import { Link } from "react-router-dom";
 interface Props {
   endpointName: string;
   qualifier: string;
@@ -45,7 +46,6 @@ const TokenHolderList = ({
               <Tr>
                 <Th>User</Th>
                 <Th>Token</Th>
-                <Th>DateTime</Th>
                 <Th isNumeric>Amount Token</Th>
               </Tr>
             </Thead>
@@ -53,10 +53,14 @@ const TokenHolderList = ({
               {holders.map((holder) => (
                 <Tr key={holder.userId.toString() + holder.tokenId}>
                   <Td>
-                    {holder.userName} ({holder.userId})
+                    <Link to={`/user/${holder.userId}`}>
+                      {holder.userName} ({holder.userId})
+                    </Link>
                   </Td>
                   <Td>
-                    {holder.tokenId} ({holder.tokenSymbol})
+                    <Link to={`/token/${holder.tokenId}`}>
+                      {holder.tokenName} ({holder.tokenSymbol})
+                    </Link>
                   </Td>
                   <Td>{formatDecimalString(holder.balance)}</Td>
                 </Tr>
@@ -66,7 +70,6 @@ const TokenHolderList = ({
               <Tr>
                 <Th>User</Th>
                 <Th>Token</Th>
-                <Th>DateTime</Th>
                 <Th isNumeric>Amount Token</Th>
               </Tr>
             </Tfoot>
