@@ -29,10 +29,10 @@ export { NETWORK_ID, DAPP_DEFINITION_ADDRESS, GATEWAY_API_URL };
 //" package_tdx_2_1p5y23xuhxprfl0fw2njxa7sg0m8aqzvcat6mlkc2mnmtlfnne6hl23";
 
 export const PLATFORM_COMPONENT_ADDRESS =
-  "component_tdx_2_1cqulueycevn757vxk7tacdyt8ll0lgtjan85wh4gwnpzx00jed3eka";
+  "component_tdx_2_1cpc902xqq7q7mx0n3l77vfs3nf37ph0qhq430rgavha3fffc6yrp30";
 
 export const USER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1nt3xw2mk6jcyh255hcy3z4kx0l86wqntkpmhf76zn5j4tyr4d2ncw2";
+  "resource_tdx_2_1ngy2zx534xqen25574ulptlu2x0n9gjr9ull4ywrzttg6ctafgqjst";
 
 export const OWNER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1ntymr2z642ge7ycjk40r89mn5pc8g5v8lymhznnrjptklm0z2pne05";
+  "resource_tdx_2_1nt3q37csvvgmh77vrv54th6cslshqep3yvj5n96ap09m4hf0xeyd4v";

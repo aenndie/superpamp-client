@@ -10,6 +10,7 @@ import {
 import useUser from "../hooks/useUser";
 import EarningsList from "./EarningsList";
 import TradesList from "./TradesList";
+import TokenHolderList from "./TokenHolderList";
 
 const UserDetail = () => {
   const params = useParams();
@@ -29,6 +30,7 @@ const UserDetail = () => {
             <TabList>
               <Tab>Earnings</Tab>
               <Tab>Trades</Tab>
+              <Tab>Holders</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -46,6 +48,15 @@ const UserDetail = () => {
                   listening='ReceiveNewTradeForUser'
                   unsubscription='UnsubscribeFromTradeForUser'
                 ></TradesList>
+              </TabPanel>
+              <TabPanel>
+                <TokenHolderList
+                  endpointName='holdersperuser'
+                  qualifier={user.userId}
+                  subscription=''
+                  listening=''
+                  unsubscription=''
+                ></TokenHolderList>
               </TabPanel>
             </TabPanels>
           </Tabs>

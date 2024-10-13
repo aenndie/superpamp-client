@@ -1,7 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useToken } from "../hooks/useTokens";
-import { Text } from "@chakra-ui/react";
+import {
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+} from "@chakra-ui/react";
 import TradesList from "./TradesList";
+import TokenHolderList from "./TokenHolderList";
 
 const TokenDetail = () => {
   const params = useParams();
@@ -16,14 +24,33 @@ const TokenDetail = () => {
           <Text>{token.description}</Text>
           <Text>{token.imageUrl ?? "-"}</Text>
           <Text>{token.iconUrl ?? "-"}</Text>
-          <TradesList
-            key={`trades-per-token${token.id}`}
-            endpointName='trades'
-            subscription='SubscribeToTradeForToken'
-            listening='ReceiveNewTradeForToken'
-            unsubscription='UnsubscribeFromTradeForToken'
-            qualifier={token.id}
-          ></TradesList>
+          <Tabs>
+            <TabList>
+              <Tab>Trades</Tab>
+              <Tab>Holder</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <TradesList
+                  key={`trades-per-token${token.id}`}
+                  endpointName='trades'
+                  subscription='SubscribeToTradeForToken'
+                  listening='ReceiveNewTradeForToken'
+                  unsubscription='UnsubscribeFromTradeForToken'
+                  qualifier={token.id}
+                ></TradesList>
+              </TabPanel>
+              <TabPanel>
+                <TokenHolderList
+                  endpointName='holderspertoken'
+                  qualifier={token.id}
+                  subscription=''
+                  listening=''
+                  unsubscription=''
+                ></TokenHolderList>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </>
       )}
     </div>
