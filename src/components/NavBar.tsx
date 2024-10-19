@@ -5,6 +5,7 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import CreateToken from "./CreateToken";
 import CreateUser from "./CreateUser";
 import { useWallet } from "../state_management/contexts/walletContext";
+import { Link } from "react-router-dom";
 const NavBar = () => {
   const { username } = useWallet();
   const tokenDialog = useDisclosure();
@@ -12,8 +13,13 @@ const NavBar = () => {
   const hasUser = username != null;
   return (
     <HStack justifyContent='space-between' padding='10px'>
-      <Image src={logo} boxSize='60px'></Image>
+      <Link to='/'>
+        <Image src={logo} boxSize='60px'></Image>
+      </Link>
       <ColorModeSwitch />
+      <Button>
+        <Link to={`/user/`}>User List</Link>
+      </Button>
       <Button isDisabled={!hasUser} onClick={tokenDialog.onOpen}>
         Create new token
       </Button>

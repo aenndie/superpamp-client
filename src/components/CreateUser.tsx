@@ -12,12 +12,10 @@ import {
   Input,
   FormHelperText,
   Textarea,
-  Box,
   Text,
 } from "@chakra-ui/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { create_user, CreateUserType } from "../manifest/createUser";
 
@@ -37,31 +35,13 @@ const schema = z.object({
 type FormDataUser = z.infer<typeof schema>;
 
 const CreateUser = ({ isOpen, onClose }: Props) => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [showFileNotice, setShowFileNotice] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormDataUser>({ resolver: zodResolver(schema) });
 
-  /*const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      console.log("handleFileChange: ", event);
-      setSelectedFile(event.target.files[0]);
-      setShowFileNotice(false);
-    } else {
-      setShowFileNotice(true);
-    }
-  };
-  */
-
   const onSubmit = async (data: FieldValues) => {
-    /*if (selectedFile == null) {
-      setShowFileNotice(true);
-      return;
-    }*/
-
     console.log("creating new user", data);
 
     const user: CreateUserType = {
@@ -100,35 +80,6 @@ const CreateUser = ({ isOpen, onClose }: Props) => {
               <FormHelperText>Enter your bio.</FormHelperText>
               <Textarea mt={2} placeholder='Bio' {...register("bio")} />
               {errors.bio && <Text color='red.500'>{errors.bio.message}</Text>}
-              <Box>
-                {/* Hidden file input */}
-                <Input
-                  type='file'
-                  // onChange={handleFileChange}
-                  display='none'
-                  id='file-upload'
-                />
-
-                {/* Styled button to trigger file input */}
-                <Button
-                  mt={5}
-                  as='label'
-                  htmlFor='file-upload'
-                  colorScheme='teal'
-                >
-                  Select a file
-                </Button>
-
-                {/* Display the name of the selected file */}
-                {selectedFile && (
-                  <Box mt={2}>
-                    Selected file: <strong>{selectedFile.name}</strong>
-                  </Box>
-                )}
-                {showFileNotice && (
-                  <Text color='red.500'>Please select an image file.</Text>
-                )}
-              </Box>
             </FormControl>
           </form>
         </ModalBody>

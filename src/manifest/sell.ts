@@ -22,8 +22,8 @@ TAKE_ALL_FROM_WORKTOP
 ;
 CALL_METHOD
     Address("@@component_address@@")
-    "sell"    
-    Proof("proof")
+    "sell_with_user"    
+    Some(Proof("proof"))
     Bucket("token_bucket")
     @@referrer@@
 ;

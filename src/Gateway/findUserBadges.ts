@@ -45,8 +45,8 @@ function getNonFungibleVault(
   return gatewayClient
     .post("/state/entity/page/non-fungible-vaults/", json)
     .then((response) => {
-      let vault_address = response.data.items[0].vault_address;
       console.log("success: ", response);
+      let vault_address = response.data.items[0].vault_address;
       return vault_address;
     })
     .catch((err) => {

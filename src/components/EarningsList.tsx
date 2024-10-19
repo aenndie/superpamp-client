@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import useEarnings from "../hooks/useEarnings";
 import formatDecimalString from "../misc/format";
+import { Link } from "react-router-dom";
 interface Props {
   userId: string;
 }
@@ -44,7 +45,11 @@ const EarningsList = ({ userId }: Props) => {
                   <Td>{earning.userName}</Td>
                   <Td>{formatDecimalString(earning.provisionXrd)}</Td>
                   <Td>{earning.action}</Td>
-                  <Td>{earning.tokenName}</Td>
+                  <Td>
+                    <Link to={`/token/${earning.tokenAddress}`}>
+                      {earning.tokenName} ({earning.tokenSymbol})
+                    </Link>
+                  </Td>
                   <Td>{earning.tokenSymbol}</Td>
                   <Td>{formatDecimalString(earning.amountToken)}</Td>
                   <Td>{formatDecimalString(earning.amountXrd)}</Td>

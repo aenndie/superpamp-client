@@ -14,3 +14,7 @@ export function get_ref_param(): string {
 
   return param;
 }
+
+export function delete_cookie() {
+  Cookies.remove("RefCookie");
+}

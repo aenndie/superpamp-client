@@ -52,7 +52,7 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors }, // isValid
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +79,7 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
       description: data.description,
     };
 
-    let success = await create_token(token, userid, "");
+    let success = await create_token(token, userid);
     if (success) {
       onClose();
     }
@@ -163,7 +163,7 @@ const CreateToken = ({ isOpen, onClose }: Props) => {
           <Button
             type='submit'
             form='create-token-form'
-            isDisabled={!isValid && false}
+            // isDisabled={!isValid && false}
           >
             Create
           </Button>

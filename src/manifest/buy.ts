@@ -24,8 +24,8 @@ TAKE_ALL_FROM_WORKTOP
 ;
 CALL_METHOD
   Address("@@component_address@@")
-  "buy"
-  Proof("proof")  
+  "buy_with_user"
+  Some(Proof("proof"))
   Bucket("xrd_bucket")
   @@referrer@@
 ;

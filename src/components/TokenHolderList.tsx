@@ -41,7 +41,7 @@ const TokenHolderList = ({
       {!error && holders && (
         <TableContainer>
           <Table variant='simple'>
-            <TableCaption>Trades for {qualifier}</TableCaption>
+            <TableCaption>Holders for {qualifier}</TableCaption>
             <Thead>
               <Tr>
                 <Th>User</Th>

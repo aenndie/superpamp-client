@@ -29,7 +29,7 @@ function App() {
           <NavBar></NavBar>
         </GridItem>
         <Show above='lg'>
-          <GridItem area='aside'>Aside</GridItem>
+          <GridItem area='aside'></GridItem>
         </Show>
         <GridItem area='main'>
           <Outlet></Outlet>

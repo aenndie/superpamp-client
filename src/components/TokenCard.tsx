@@ -9,6 +9,13 @@ import {
   Input,
   FormControl,
   Box,
+  TableContainer,
+  Thead,
+  Table,
+  Th,
+  Tbody,
+  Tr,
+  Td,
 } from "@chakra-ui/react";
 import { Token } from "../hooks/useTokens";
 import { buy } from "../manifest/buy";
@@ -19,8 +26,10 @@ import { useState } from "react";
 interface Props {
   token: Token;
 }
+import memeImage from "@/assets/meme.webp";
+import formatDecimalString from "../misc/format";
 
-const DEFAULT_IMAGE = "http://localhost:5173/src/assets/meme.webp"; // Replace with your default image URL
+const DEFAULT_IMAGE = memeImage;
 
 const TokenCard = ({ token }: Props) => {
   const { userid } = useWallet();
@@ -61,11 +70,43 @@ const TokenCard = ({ token }: Props) => {
           </Button>
         </FormControl>
         <Spacer></Spacer>
-        <Text>Latest Mcap Pool: {token.latestMcapPool}</Text>
-        <Text>Latest Mcap Bonding: {token.latestMcapBonding}</Text>
-        <Text>Latest Price Bonding: {token.latestPriceBonding}</Text>
-        <Text>Latest Price Pool: {token.latestPricePool}</Text>
-        <Text>Bonding Progress: {token.bondingProgress}</Text>
+        <TableContainer>
+          <Table variant='simple'>
+            <Thead>
+              <Tr>
+                <Th>Field</Th>
+                <Th>Value</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>Latest Mcap Pool</Td>
+                <Td>{formatDecimalString(token.latestMcapPool)}</Td>
+              </Tr>
+              <Tr>
+                <Td>Latest Mcap Bonding</Td>
+                <Td>{formatDecimalString(token.latestMcapBonding)}</Td>
+              </Tr>
+              <Tr>
+                <Td>Latest Price Bonding</Td>
+                <Td>{formatDecimalString(token.latestPriceBonding)}</Td>
+              </Tr>
+              <Tr>
+                <Td>Latest Price Pool</Td>
+                <Td>{formatDecimalString(token.latestPricePool)}</Td>
+              </Tr>
+              <Tr>
+                <Td>Bonding Progress</Td>
+                <Td>
+                  {formatDecimalString(
+                    (parseFloat(token.bondingProgress) * 100.0).toString()
+                  )}{" "}
+                  %
+                </Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
         <Box>
           <Button>
             <Link to={`/token/${token.id}`}>Details</Link>
