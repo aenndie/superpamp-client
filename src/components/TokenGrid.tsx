@@ -19,7 +19,7 @@ const TokenGrid = () => {
         padding='10px'
       >
         {tokens.map((token) => (
-          <TokenCard key={token.id} token={token} /> //
+          <TokenCard key={token.id} tokenOrig={token} /> //
         ))}
       </SimpleGrid>
     </>

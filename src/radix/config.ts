@@ -7,8 +7,8 @@ let DAPP_DEFINITION_ADDRESS: any;
 let GATEWAY_API_URL: any;
 export let XRD: string = "";
 
-// export const BACKEND_URL = "https://localhost:7277/";
-export const BACKEND_URL = "https://superpampapi.aenndie.com/";
+export const BACKEND_URL = "https://localhost:7277/";
+// export const BACKEND_URL = "https://superpampapi.aenndie.com/";
 
 if (IS_MAINNET) {
   NETWORK_ID = RadixNetwork.Mainnet;

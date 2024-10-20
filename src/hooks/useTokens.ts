@@ -44,7 +44,7 @@ const useTokens = () => {
 export default useTokens;
 
 export const useToken = (id: string) => {
-  const [token, setToken] = useState<Token>();
+  const [tokenOrig, setToken] = useState<Token>();
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export const useToken = (id: string) => {
       });
   }, []);
 
-  return { token, error };
+  return { tokenOrig, error };
 };
 
 export function uploadFile(id: number, selectedFile: File) {

@@ -19,14 +19,16 @@ import {
 import TradesList from "./TradesList";
 import TokenHolderList from "./TokenHolderList";
 import formatDecimalString from "../misc/format";
+import useTokenSubscription from "../hooks/useTokenSubscription";
 
 const TokenDetail = () => {
   const params = useParams();
-  const { token, error } = useToken(params.address!);
+  const { tokenOrig, error } = useToken(params.address!);
+  const token = useTokenSubscription(tokenOrig);
 
   return (
     <div>
-      {(error || !token) && <Text>{error}</Text>}
+      {(error || !tokenOrig) && <Text>{error}</Text>}
       {!error && token && (
         <>
           <Tabs align='start'>
