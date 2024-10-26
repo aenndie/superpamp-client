@@ -52,6 +52,18 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
 
     // Subscribe to the walletData$ observable
     const subscription = rdt.walletApi.walletData$.subscribe((walletData) => {
+      console.log("subscription changed...");
+      console.log("walletData = ", walletData);
+      console.log("walletData.persona = ", walletData.persona);
+      console.log(
+        "walletData.persona = undefined",
+        walletData.persona == undefined
+      );
+      console.log(
+        "walletData.persona = undefined",
+        walletData.persona === undefined
+      );
+
       if (walletData && walletData.accounts && walletData.accounts.length > 0) {
         const account = walletData.accounts[0].address;
         selectedAccount = account;

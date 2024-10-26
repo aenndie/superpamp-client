@@ -7,8 +7,9 @@ let DAPP_DEFINITION_ADDRESS: any;
 let GATEWAY_API_URL: any;
 export let XRD: string = "";
 
-export const BACKEND_URL = "https://localhost:7277/";
-// export const BACKEND_URL = "https://superpampapi.aenndie.com/";
+//export const BACKEND_URL = "https://localhost:7277/";
+//export const BACKEND_URL = "https://superpampapi.aenndie.com/";
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 if (IS_MAINNET) {
   NETWORK_ID = RadixNetwork.Mainnet;
@@ -30,10 +31,10 @@ export { NETWORK_ID, DAPP_DEFINITION_ADDRESS, GATEWAY_API_URL };
 //" package_tdx_2_1p5y23xuhxprfl0fw2njxa7sg0m8aqzvcat6mlkc2mnmtlfnne6hl23";
 
 export const PLATFORM_COMPONENT_ADDRESS =
-  "component_tdx_2_1cr9txmaeneardx7k0tcag8r97hpu75cjtyy4l7pnqlenf6v8nynrs3";
+  "component_tdx_2_1crh64ajrtjg4ty7y7ulk4k2tja7sle8auk3mh24sprnnq6kppmt5v2";
 
 export const OWNER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1ngftxcg6m0r9er9h329fmr2g075l3nseytht5y6gua2n353ee8753x";
+  "resource_tdx_2_1n2aa0uvkzasuj4e6m7y84trqjkgqgrexht3l6dxz0jmy2gwg5tk0qh";
 
 export const USER_BADGE_RESOURCE_ADDRESS =
-  "resource_tdx_2_1n24wscnkkxpy5t3ge5ulksdepf5qvg3alldv53cvg6wpyc9wsv9rem";
+  "resource_tdx_2_1nfdx5x0thc9e9ac6p5t3fpus8wfqaeyg0g7rhemwets6dhzfshdxug";
