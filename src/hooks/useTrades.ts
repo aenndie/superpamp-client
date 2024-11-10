@@ -86,6 +86,7 @@ const useTrades = (
           // Listen for new trades related to this token
           console.log("listening....");
           connection.on(listening, (newTrade: Trade) => {
+            console.log("new Trade: ", newTrade);
             setTrades((prevTrades) => [newTrade, ...prevTrades]);
           });
           console.log("after listening....");
